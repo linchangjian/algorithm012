@@ -1,12 +1,41 @@
+import java.util.*;
 
-## 岛屿数量
+public class Main {
 
-这个题目主要还是要练习dfs，这道题目有个点，就是乍一看这个计数的逻辑不是很好懂，
-慢慢分析，就知道遍历以后0的操作主要就是避免下次遍历到，达到计数的作用，这里有个
-想法，如果题目要求不允许修改原来数据的内容，应该怎么操作呢？那应该就涉及到数据还原的逻辑。
+    public static void main(String[] args) {
+        int [] changes = {5,5,5,10,20};
+        boolean b = lemonadeChange(changes);
+        System.out.println(b);
+        printArray(changes);
 
-```
-  static void dfs(char[][] grid, int r, int c){
+        System.out.println();
+        char [][] lands = {
+                {'1','1','1','1','0'},
+                {'1','1','0','1','0'},
+                {'1','1','0','0','0'},
+                {'0','0','0','0','0'}
+            };
+        int i = numIslands(lands);
+        System.out.println("岛屿数量 ："+i);
+    }
+
+    public static void printArray(int[] nums){
+        if (nums == null){
+            throw new NullPointerException("nums is null");
+        }
+        System.out.print("[");
+        int index = 0;
+        for (int num : nums) {
+            index++;
+            if (index == nums.length){
+                System.out.print(num+"]");
+            }else {
+                System.out.print(num+",");
+            }
+        }
+    }
+
+    static void dfs(char[][] grid, int r, int c){
         int nr = grid.length;
         int nc = grid[0].length;
         if (r < 0 || c < 0 || r >= nr || c > nc || grid[r][c] == '0'){
@@ -43,14 +72,7 @@
         return numIslands;
     }
 
-```
-
-## 柠檬水找零
-
-逻辑算法，主要是枚举好收入的5、10找零枚举情况
-
-```
-public static boolean lemonadeChange(int[] bills) {
+    public static boolean lemonadeChange(int[] bills) {
         int five = 0 , ten = 0;
         for (int bill : bills) {
             if (bill == 5) {
@@ -75,11 +97,6 @@ public static boolean lemonadeChange(int[] bills) {
         return true;
     }
 
-```
 
-## 本周总结
 
-dfs、bfs，学习搜索的使用，这次用岛屿的题目进行练习，体会到这个算法的好处。
-以后涉及到搜索的题目，可以优先看看这些算法能不能用上，让这个内化成个人的算法库。
-
-课程中的模板起到很好的学习作用，帮助快速提升做题能力，还是需要多练。
+}
