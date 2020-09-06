@@ -3,30 +3,21 @@
 
 
 ```
-   public int[] relativeSortArray(int[] arr1, int[] arr2) {
-
-            int[] temp = new int[1001];
-            for (int i : arr1) {
-                temp[i]++;
-            }
-            int index = 0;
-
-            for (int i : arr2) {
-                while (temp[i]>0){
-                    arr1[index++]=i;
-                    temp[i]--;
-                }
-            }
-
-            for (int i = 0; i < temp.length; i++) {
-                while (temp[i]>0){
-                    arr1[index++] = i;
-                    temp[i]--;
-                }
-            }
-
-            return arr1;
-        }
+   public int firstUniqChar(String s) {
+              HashMap<Character, Integer> count = new HashMap<Character, Integer>();
+              int n = s.length();
+              for (int i = 0; i < n; i++) {
+                  char c = s.charAt(i);
+                  count.put(c, count.getOrDefault(c, 0) + 1);
+              }
+  
+              // find the index
+              for (int i = 0; i < n; i++) {
+                  if (count.get(s.charAt(i)) == 1)
+                      return i;
+              }
+              return -1;
+          }
 
 ```
 
@@ -34,16 +25,21 @@
 
 ## 231. 2的幂
 ```
-  public boolean isPowerOfTwo(int n) {
-            if (n == 0) return false;
-            while (n % 2 == 0) n /= 2;
-            return n == 1;
+ public String reverseStr(String s, int k) {
+            char[] a = s.toCharArray();
+            for (int start = 0; start < a.length; start += 2 * k) {
+                int i = start, j = Math.min(start + k - 1, a.length - 1);
+                while (i < j) {
+                    char tmp = a[i];
+                    a[i++] = a[j];
+                    a[j--] = tmp;
+                }
+            }
+            return new String(a);
         }
-
 
 ```
 
 ## 本周总结
 
- - 位运算的核心是可以优化很多计算机的运行性能，学会是必要的，熟练也是必要的
- - 本周练习比较少，后期需补课，持续五毒，才是王道
+ - 字符串的操作经常会在工作中用到，需要多做多练
